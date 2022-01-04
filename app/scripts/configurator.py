@@ -19,9 +19,9 @@ def create_config():
                "Мужчина определяется делом, а не словом."]
 
     config = {"token": token, "timeout": timeout, "phrases": phrases}
-    json = dumps(config, indent=2)
+    json = dumps(config, indent=2, ensure_ascii=False)
 
-    with open("../data/config.json", "w", encoding="utf-8") as config_file:  # Проблема с кодировкой никак не влияет на работоспособность бота
+    with open("../data/config.json", "w", encoding="utf-8") as config_file:
         config_file.write(json)
 
     config_file.close()

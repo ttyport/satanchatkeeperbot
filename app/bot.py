@@ -41,10 +41,12 @@ async def captcha(message: types.Message):
     print(datetime.now(), f"User @{message.from_user.username} joined the group. Captcha sent, timer is running")
     username = message.new_chat_members[0].username
     solution = generate_captcha(username)
-    await bot.send_photo(message.chat.id, types.InputFile(f"../data/{username}.png"), f"Добро пожаловать, @{username}!\nЧтобы "
-                                                                              f"доказать, что ты не бот - ответь на "
-                                                                              f"это сообщение решением капчи.\n"
-                                                                              f"У тебя одна минута.")
+    await bot.send_photo(message.chat.id, types.InputFile(f"../data/{username}.png"),
+                         f"Добро пожаловать, @{username}!\nЧтобы "
+                         f"доказать, что ты не бот - ответь на "
+                         f"это сообщение решением капчи.\n"
+                         f"У тебя одна минута.")
+    await bot.send_message(message.chat.id, "Предупреждаю! Это - не ответ на сообщение.")
 
     unapproved_users[username] = solution
     await set_timeout(message.chat.id, username, message.from_user.id)
